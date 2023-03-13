@@ -43,7 +43,7 @@ pub fn view(json_map map[string]string) {
 	for key, value in json_map { 
 		key_colorized := term.hex(0x3ddad2, key)
 		val_colorized := term.hex(0xf29db3, value)
-		println("${key_colorized:-29} = $val_colorized")
+		println("${key_colorized:-29} = $val_colorized") 
 	}
 }
 
