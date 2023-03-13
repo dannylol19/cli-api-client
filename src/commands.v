@@ -40,9 +40,10 @@ pub fn view(json_map map[string]string) {
 		return
 	} 
 
-	// todo: left align the keys with padding
-	for key, value in json_map {   // todo: why this no work
-		println("${term.hex(0x3ddad2, key):-10} = ${term.hex(0xf29db3, value)}")
+	for key, value in json_map { 
+		key_colorized := term.hex(0x3ddad2, key)
+		val_colorized := term.hex(0xf29db3, value)
+		println("${key_colorized:-29} = $val_colorized")
 	}
 }
 
