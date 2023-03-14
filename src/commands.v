@@ -3,6 +3,8 @@ module commands
 import os
 import net.http
 import term
+import arrays
+import strings
 
 pub fn help() {
 	println("Commands: ")
@@ -15,7 +17,7 @@ pub fn help() {
 
 pub fn create(mut json_map map[string]string, var_name string) {
 	data := os.input("Input the json data: ")	
-	json_map[var_name] = data 
+	json_map[var_name] = data
 }
 
 pub fn remove(mut json_map map[string]string, var_name string) {
@@ -40,10 +42,18 @@ pub fn view(json_map map[string]string) {
 		return
 	} 
 
+	// calculate longest key length
+	max_len := arrays.max(json_map.keys().map(it.len)) or {
+		println(err)
+		return
+	}
+
 	for key, value in json_map { 
 		key_colorized := term.hex(0x3ddad2, key)
 		val_colorized := term.hex(0xf29db3, value)
-		println("${key_colorized:-29} = $val_colorized") 
+
+		padding := strings.repeat(` `, max_len - key.len)
+		println('${key_colorized}$padding = $val_colorized')
 	}
 }
 
